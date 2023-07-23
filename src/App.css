@@ -1,0 +1,11 @@
+.passwordButton {
+    margin-left: auto;
+    background-color: rgb(21, 20, 20);
+    color: aliceblue;
+    height: 60px;
+    width: 40px;
+    border-radius: 5px;
+    font-size: large;
+    
+}
+

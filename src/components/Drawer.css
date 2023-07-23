@@ -1,0 +1,27 @@
+/* * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+} */
+
+.side-bar {
+  margin-top: 15px;
+  padding: 0;
+}
+
+.side-bar > li {
+  width: 100%;
+  text-align: center;
+  margin: 5px;
+  padding: 8px 10px;
+  font-size: medium;
+  border-style: solid;
+  border-radius: 5px;
+  background-color: rgba(217, 217, 206, 0.683);
+  border-collapse: collapse;
+}
+
+.side-bar li:hover{
+  background-color: rgba(243, 236, 228, 0.826);
+  animation-delay: 10s;
+}
