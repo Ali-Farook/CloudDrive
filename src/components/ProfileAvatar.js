@@ -38,7 +38,7 @@ const ProfileAvatar = (props) => {
     };
 
     const handleLogout = (e) => {
-        e.reload()
+        
         localStorage.removeItem('auth-token');
         Navigate('/login');
     }

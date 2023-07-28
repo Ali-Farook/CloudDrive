@@ -129,7 +129,7 @@ router.put('/changepassword', fetchUser, async (req, res) => {
    try {
       const { oldPassword, newPassword, conformPassword } = req.body;
       const userId = req.User.id;
-     const User = await user.findById(userId);
+      const User = await user.findById(userId);
       if (!User) {
          return res.status(500).json({ error: "User not found" });
       }
@@ -142,9 +142,9 @@ router.put('/changepassword', fetchUser, async (req, res) => {
       }
       // const salt = await bcrypt.genSalt(6);
       // const newHashPassword = await bcrypt.hash(conformPassword, salt);
-      const newpassword = {password: conformPassword}
-      User.password = await user.findOneAndUpdate(userId, newpassword, {new:true})
-       return res.json(User);
+      const newpassword = { password: conformPassword }
+      User.password = await user.findOneAndUpdate(userId, newpassword, { new: true })
+      return res.json(User);
 
    } catch (error) {
       return res.status(500).json({ error: "Internal server error" });
