@@ -24,7 +24,7 @@ const Nav = () => {
 
   return (
     <>
-      {localStorage.getItem('auth-token')&& <nav>
+      {localStorage.getItem('auth-token') && <nav>
         <ul style={style} >
           <li style={style1} >
             <Link style={{ textDecoration: "none", color: "white" }} to="/">Home</Link>
@@ -32,7 +32,8 @@ const Nav = () => {
           <li style={style1} >
             <Link style={{ textDecoration: "none", color: "white" }} to="/about">About</Link>
           </li>
-           <li style={{
+          
+          <li style={{
             float: 'right', marginTop: "10px",
             marginRight: '10px'
           }}>

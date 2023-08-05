@@ -7,9 +7,9 @@ const Home = (props) => {
   
   return (
     <div className = 'app'>
-      <Drawer />
-      <AddNote showAlert={showAlert} />
-      <Notes showAlert={showAlert} />
+      <Drawer showAlert={showAlert}/>
+      {/* <AddNote showAlert={showAlert} /> */}
+      {/* <Notes showAlert={showAlert} /> */}
     </div>
   )
 }

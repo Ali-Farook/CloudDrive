@@ -28,7 +28,7 @@ function App() {
     <>
       <NoteState>
         <BrowserRouter>
-          <Nav />
+          {/* <Nav /> */}
           < Alerts alert={alert} />
           <Routes>
             <Route exact path='/' element={<Home showAlert={showAlert} />} />

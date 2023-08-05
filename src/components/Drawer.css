@@ -11,10 +11,11 @@
 
 .side-bar > li {
   width: 100%;
+  align-items: center;
   text-align: center;
   margin: 5px;
   padding: 8px 10px;
-  font-size: medium;
+  font-size: x-large;
   border-style: solid;
   border-radius: 5px;
   background-color: rgba(217, 217, 206, 0.683);
