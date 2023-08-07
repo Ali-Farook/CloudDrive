@@ -20,10 +20,10 @@ export default function BasicTextFields() {
                 'Content-Type': 'application/json',
                 'auth-token': localStorage.getItem('auth-token')
             },
-            body: JSON.stringify({ oldPassword: oldPassword, newPassword: newPassword, conformPassword: conformPassword })
+            body: JSON.stringify({oldPassword, newPassword, conformPassword })
         });
         const json = await response.json();
-        console.log(json)
+        console.log("Password state of update: ", json.success)
     };
 
     return (

@@ -78,7 +78,7 @@ router.post('/login', [
       const passwordCompare = await bcrypt.compare(password, User.password);
       if (!passwordCompare) {
          success = false;
-         return res.status(401).json({ success, error: 'pass issue' });
+         return res.status(402).json({ success, error: "pass issue" });
       }
       let data = {
          User: {
@@ -127,24 +127,27 @@ router.get('/getThisUser', fetchUser, async (req, res) => {
 
 router.put('/changepassword', fetchUser, async (req, res) => {
    try {
+      let success = false;
       const { oldPassword, newPassword, conformPassword } = req.body;
       const userId = req.User.id;
       const User = await user.findById(userId);
-      if (!User) {
+      let userEmail = User.email;
+      const tempUser = await user.findOne({ userEmail });
+      if (!tempUser) {
+         success = false;
          return res.status(500).json({ error: "User not found" });
       }
-      const comparePassword = await bcrypt.compare(oldPassword, User.password);
-      if (!comparePassword) {
+      const comparePassword = await bcrypt.compare(oldPassword, tempUser.password);
+      if (comparePassword == false) {
+         success = false;
          return res.status(401).json({ error: "Enter correct password" });
       }
-      if (newPassword !== conformPassword) {
-         return res.status(401).json({ error: "Enter correct password" });
-      }
-      // const salt = await bcrypt.genSalt(6);
-      // const newHashPassword = await bcrypt.hash(conformPassword, salt);
-      const newpassword = { password: conformPassword }
-      User.password = await user.findOneAndUpdate(userId, newpassword, { new: true })
-      return res.json(User);
+      const salt = await bcrypt.genSalt(6);
+      const newHashPassword = await bcrypt.hash(newPassword, salt);
+      const password = { password: newHashPassword }
+      User.password = await user.findOneAndUpdate(userId, { $set: password }, { new: true });
+      success = true;
+      return res.json({ success, res: "Password Updated" });
 
    } catch (error) {
       return res.status(500).json({ error: "Internal server error" });
