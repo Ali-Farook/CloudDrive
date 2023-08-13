@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
 
 const ImageList = () => {
   return (
-    <div>ImageList</div>
-  )
-}
+    <div style={{marginTop:'10px', textAlign: "center"}}>
+      <h1>Upload your Image </h1>
+      
+    </div>
+  );
+};
 
-export default ImageList
+export default ImageList;

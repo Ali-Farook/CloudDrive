@@ -16,12 +16,16 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import SummarizeOutlinedIcon from '@mui/icons-material/SummarizeOutlined';
+import CropOriginalIcon from '@mui/icons-material/CropOriginal';
+import { purple } from '@mui/material/colors';
 import AddNote from "./addnote"
 import Notes from './Notes'
 import ProfileAvatar from './ProfileAvatar';
 import { Link } from 'react-router-dom';
+import Home from './Home';
+import NoteSection from './NoteSection';
+import ImageList from './ImageList';
 
 const drawerWidth = 240;
 
@@ -91,9 +95,17 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function MiniDrawer(props) {
+    const color = purple[400];
     const { showAlert } = props;
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
+    // Custom Hool for opening ImageList or NoteSection
+    const [whichShouldOpen, setwhichShouldOpen] = React.useState("Notes");
+
+    // Custom Hool for opening ImageList or NoteSection
+    const whatToOpen = (openItem) => {
+        setwhichShouldOpen(`${openItem}`);
+    };
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -124,12 +136,10 @@ export default function MiniDrawer(props) {
                         CloudDrive
                     </Typography>
                     <Typography variant="h6" noWrap component="div" sx={{}}>
-                            <Link style={{ textDecoration: "none" }} to="">
-                                <ProfileAvatar />
-                            </Link>
-                        
+                        <Link style={{ textDecoration: "none" }} to="">
+                            <ProfileAvatar />
+                        </Link>
                     </Typography>
-
                 </Toolbar>
             </AppBar>
             <Drawer variant="permanent" open={open}>
@@ -140,58 +150,66 @@ export default function MiniDrawer(props) {
                 </DrawerHeader>
                 <Divider />
                 <List>
-                    {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                        <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-                            <ListItemButton
+                    <ListItem disablePadding sx={{ display: 'block' }}>
+                        <ListItemButton
+                            sx={{
+                                minHeight: 48,
+                                justifyContent: open ? 'initial' : 'center',
+                                px: 2.5,
+                            }}
+                        >
+                            <ListItemIcon
                                 sx={{
-                                    minHeight: 48,
-                                    justifyContent: open ? 'initial' : 'center',
-                                    px: 2.5,
+                                    minWidth: 0,
+                                    mr: open ? 3 : 'auto',
+                                    justifyContent: 'center',
                                 }}
+                                onClick={() => whatToOpen("Notes")}
                             >
-                                <ListItemIcon
-                                    sx={{
-                                        minWidth: 0,
-                                        mr: open ? 3 : 'auto',
-                                        justifyContent: 'center',
-                                    }}
-                                >
-                                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                                </ListItemIcon>
-                                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
+                                {/* 
+                                Note Link
+                                 */}
+                                <Link style={{ textDecoration: "none" }} to="">
+                                    <SummarizeOutlinedIcon />
+                                </Link>
+
+                            </ListItemIcon>
+                            <ListItemText primary="Notes" sx={{ opacity: open ? 1 : 0 }} />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem disablePadding sx={{ display: 'block' }}>
+                        <ListItemButton
+                            sx={{
+                                minHeight: 48,
+                                justifyContent: open ? 'initial' : 'center',
+                                px: 2.5,
+                            }}
+                        >
+                            <ListItemIcon
+                                sx={{
+                                    minWidth: 0,
+                                    mr: open ? 3 : 'auto',
+                                    justifyContent: 'center',
+                                }}
+
+                            >
+                                {/* 
+                                Image Link
+                                 */}
+                                <Link style={{ textDecoration: "none" }} to="">
+                                    <CropOriginalIcon onClick={() => whatToOpen("Image")} />
+                                </Link>
+
+                            </ListItemIcon>
+                            <ListItemText primary="Image" sx={{ opacity: open ? 1 : 0 }} />
+                        </ListItemButton>
+                    </ListItem>
                 </List>
+                {/* This Is Divider Line */}
                 <Divider />
-                {/* <List>
-                    {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                        <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-                            <ListItemButton
-                                sx={{
-                                    minHeight: 48,
-                                    justifyContent: open ? 'initial' : 'center',
-                                    px: 2.5,
-                                }}
-                            >
-                                <ListItemIcon
-                                    sx={{
-                                        minWidth: 0,
-                                        mr: open ? 3 : 'auto',
-                                        justifyContent: 'center',
-                                    }}
-                                >
-                                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                                </ListItemIcon>
-                                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </List> */}
             </Drawer>
-            <Box component="main" sx={{ flexGrow: 1, p: 3, mt:2 }}>
-                <AddNote showAlert={showAlert} />
-                <Notes showAlert={showAlert} />
+            <Box component="main" sx={{ flexGrow: 1, p: 3, mt: 2 }}>
+                {whichShouldOpen !== "" && whichShouldOpen === "Notes" ? <NoteSection showAlert={showAlert} /> : <ImageList />}
             </Box>
         </Box>
     );

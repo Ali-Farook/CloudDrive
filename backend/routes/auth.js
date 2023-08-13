@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const JWT_SECRET = 'aliis$boy';
 const fetchUser = require('../middleware/fetchUser');
 const { body, validationResult } = require('express-validator');
-const login = require('../controllers/authentication');
+// const login = require('../controllers/authentication');
 const { findByIdAndUpdate } = require('../models/User');
 // ROUTE 1: CREATE A SIGNUP FOR NEW USER
 

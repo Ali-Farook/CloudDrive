@@ -10,6 +10,7 @@ import Alerts from "./components/Alert"
 import { useState } from 'react';
 import Profile from './components/Profile';
 import Drawer from './components/Drawer';
+import ImageList from './components/ImageList';
 
 function App() {
   document.body.style.backgroundColor = 'white';
@@ -28,7 +29,7 @@ function App() {
     <>
       <NoteState>
         <BrowserRouter>
-          {/* <Nav /> */}
+          {/* <Drawer /> */}
           < Alerts alert={alert} />
           <Routes>
             <Route exact path='/' element={<Home showAlert={showAlert} />} />
@@ -36,11 +37,12 @@ function App() {
             <Route exact path="/login" element={<Login showAlert={showAlert} />} />
             <Route exact path="/sign" element={<SignUp showAlert={showAlert} />} />
             <Route exact path="/profile" element={<Profile />} />
+            <Route exact path="/imagelist" element={< ImageList/>} />
           </Routes>
         </BrowserRouter>
       </NoteState>
     </>
   );
-}
+};
 
 export default App;

@@ -21,11 +21,19 @@ const ProfileAvatar = (props) => {
     const open = Boolean(anchorEl);
     const context = useContext(noteContext);
     const { getUser, user } = context;
+    const [isAuthToken, setisAuthToken] = React.useState(true);
     const avatarChar = String(user.firstName).at(0) + String(user.lastName).at(0);
     useEffect(() => {
         getUser();
         // eslint-disable-next-line
     }, []);
+
+    // useEffect(() => {
+    //     if (!isAuthToken) {
+    //         // <Link to="/login"></Link>
+    //         console.log("Authenticate with token")
+    //     }
+    // }, )
 
 
     const handleClick = (event) => {
@@ -38,10 +46,10 @@ const ProfileAvatar = (props) => {
     };
 
     const handleLogout = (e) => {
-        
         localStorage.removeItem('auth-token');
-        Navigate('/login');
-    }
+        Navigate('/login')
+        setisAuthToken(false);
+    };
 
     return (
         <>

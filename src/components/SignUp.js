@@ -12,6 +12,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { Card, CardContent } from '@mui/material';
 
 
 function Copyright(props) {
@@ -29,9 +30,9 @@ function Copyright(props) {
 
 export default function SignUp(props) {
   const { showAlert } = props;
+  const theme = createTheme();
   const Navigate = useNavigate();
   const [cred, setCred] = useState({ firstName: '', lastName: '', phoneNumber: '', email: '', password: '' });
-  const theme = createTheme();
   const handleSubmit = async (event) => {
     event.preventDefault();
     const response = await fetch("http://localhost:5000/api/signup", {
@@ -58,6 +59,8 @@ export default function SignUp(props) {
     Navigate('/login')
   };
   return (
+    // <Card sx={{width:'50%'}}>
+    //   <CardContent sx={{m: 0, p: 0}}>
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -160,5 +163,7 @@ export default function SignUp(props) {
         <Copyright sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
+    // </CardContent>
+    // </Card>
   )
 }

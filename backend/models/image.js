@@ -1,10 +1,22 @@
 const mongoose = require('mongoose');
-let {Schema} = mongoose;
+let { Schema } = mongoose;
 
 const imageSchema = new Schema({
-    img:{
+    User: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user'
+    },
+    title:{
+        type: String,
+        required: false
+    },
+    img: {
         data: Buffer,
         contentType: String
+    },
+    date: {
+        type: Date,
+        default: Date.now
     }
 });
 

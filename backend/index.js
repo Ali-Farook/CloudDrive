@@ -8,8 +8,10 @@ connectToMongo();
 
 app.use(cors());
 app.use(express.json());
+
 app.use('/api', require('./routes/auth'));
 app.use('/api', require('./routes/note'));
+app.use('/api', require('./routes/image'));
 
 app.listen(port, () => {
   console.log(`app listening on port http://localhost:${port}`)

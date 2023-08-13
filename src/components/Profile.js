@@ -50,6 +50,10 @@ export default function VerticalTabs() {
   const [value, setValue] = React.useState(0);
   const context = useContext(noteContext);
   const { getUser, user } = context;
+  const [name,setName] = React.useState(`${user.firstName}`);
+  const onchange=(e)=>{
+    setName(e.target.value)
+  }
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -80,6 +84,7 @@ export default function VerticalTabs() {
               </InputLabel>
               <Input
                 id="input-with-icon-adornment"
+                onChange={onchange}
                 value={user.firstName}
                 startAdornment={
                   <InputAdornment position="start">
